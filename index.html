@@ -138,15 +138,18 @@
         .item-val.bold { font-weight: 800; color: var(--primary); }
 
         .badge {
-            padding: 6px 16px;
-            border-radius: 12px;
-            font-size: 0.7rem;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: inline-block;
+            white-space: nowrap;
         }
         .badge-success { background: #d8f3dc; color: #1b4332; }
         .badge-warning { background: #fff3b0; color: #856404; }
+        .badge-info { background: #e0f2fe; color: #0369a1; }
 
         /* --- MAPS --- */
         .map-section { margin-top: 60px; }
@@ -253,35 +256,50 @@
         <div class="card">
             <div class="icon-box"><i data-lucide="map"></i></div>
             <h2>Stay Roadmap</h2>
-            <div style="margin-bottom: 20px;">
-                <div class="item" style="border-bottom: none; padding-bottom: 5px;">
+            
+            <!-- Aerotel -->
+            <div style="margin-bottom: 25px;">
+                <div class="item" style="border-bottom: none; padding-bottom: 10px;">
                     <div>
                         <span class="item-key">Aerotel T1</span><br>
                         <small>Singapore Transit</small>
                     </div>
-                    <span class="badge badge-warning" style="text-align: right;"><span style="font-weight: 800;">$1,252.00</span><br>JUN 04 PAY</span>
+                    <div style="text-align: right;">
+                        <span class="item-val bold">$1,252.00</span><br>
+                        <span class="badge badge-warning">Due Jun 04</span>
+                    </div>
                 </div>
-                <div style="padding: 0 0 15px 0; border-bottom: 1px solid #f0f0f0;">
-                    <div class="progress-label" style="font-size: 0.7rem; margin-bottom: 4px;">
-                        <span id="aerotelDaysLabel">Calculating days...</span>
-                        <span id="aerotelPercentLabel">0%</span>
+                <div style="padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;">
+                    <div class="progress-label" style="font-size: 0.65rem; margin-bottom: 6px;">
+                        <span id="aerotelDaysLabel" style="color: var(--text-muted);">Calculating...</span>
+                        <span id="aerotelPercentLabel" style="font-weight: 800;">0%</span>
                     </div>
                     <div class="mini-progress"><div id="aerotelMiniFill" class="mini-fill"></div></div>
                 </div>
             </div>
+
+            <!-- Villa -->
             <div class="item">
                 <div>
                     <span class="item-key">Villa Pamperompong</span><br>
                     <small>Lembang • 5 Nights</small>
                 </div>
-                <span class="badge badge-warning" style="text-align: right;">SHORTLISTED<br><small>PENDING CONFIRMATION / DEPOSIT</small></span>
+                <div style="text-align: right;">
+                    <span class="badge badge-info" style="margin-bottom: 4px;">Shortlisted</span><br>
+                    <small style="font-size: 0.6rem; font-weight: 700; color: var(--danger); text-transform: uppercase;">Pending Deposit</small>
+                </div>
             </div>
+
+            <!-- Fieris -->
             <div class="item">
                 <div>
                     <span class="item-key">Fieris Kertajati</span><br>
                     <small>Final Night</small>
                 </div>
-                <span class="badge badge-success" style="text-align: right;"><span style="font-weight: 800;">~$200 SGD</span><br>PAID</span>
+                <div style="text-align: right;">
+                    <span class="item-val bold">~$200 SGD</span><br>
+                    <span class="badge badge-success">Fully Paid</span>
+                </div>
             </div>
         </div>
 
