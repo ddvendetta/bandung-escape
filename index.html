@@ -131,6 +131,7 @@
         .item:last-child { border-bottom: none; }
         .item-key { font-weight: 600; color: var(--text-main); font-size: 0.95rem; }
         .item-val { color: var(--text-muted); font-size: 0.95rem; }
+        .item-val.bold { font-weight: 800; color: var(--primary); }
 
         .badge {
             padding: 6px 16px;
@@ -219,7 +220,7 @@
             <h2>Flight Budget</h2>
             <div class="item">
                 <span class="item-key">Total (13 Pax)</span>
-                <span class="item-val" style="font-weight: 800; color: var(--primary);">$2,915.90</span>
+                <span class="item-val bold">$2,915.90</span>
             </div>
             <div class="progress-container">
                 <div class="progress-label">
@@ -251,9 +252,9 @@
             <div class="item">
                 <div>
                     <span class="item-key">Aerotel T1</span><br>
-                    <small>Gate D40 • $1,252.00</small>
+                    <small>Singapore Transit</small>
                 </div>
-                <span class="badge badge-warning">JUN 04 PAY</span>
+                <span class="badge badge-warning" style="text-align: right;"><span style="font-weight: 800;">$1,252.00</span><br>JUN 04 PAY</span>
             </div>
             <div class="item">
                 <div>
@@ -265,9 +266,9 @@
             <div class="item">
                 <div>
                     <span class="item-key">Fieris Kertajati</span><br>
-                    <small>Final Night • ~$200 SGD</small>
+                    <small>Final Night</small>
                 </div>
-                <span class="badge badge-success">PAID</span>
+                <span class="badge badge-success" style="text-align: right;"><span style="font-weight: 800;">~$200 SGD</span><br>PAID</span>
             </div>
         </div>
 
@@ -277,7 +278,7 @@
             <h2>Trip Logistics</h2>
             <div class="item">
                 <span class="item-key">Private Bus (Quoted)</span>
-                <span class="item-val" style="text-align: right;">20M IDR<br><small>~$1,674 SGD</small></span>
+                <span class="item-val bold" style="text-align: right;">20M IDR<br><small>~$1,674 SGD</small></span>
             </div>
             <div class="item">
                 <span class="item-key">Luggage Load</span>
