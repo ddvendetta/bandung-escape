@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandung 2026 | Travel Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --primary: #0b2521;
+            --secondary: #1a4d3e;
+            --accent: #d4af37;
+            --accent-light: #f1e4bc;
+            --success: #2d6a4f;
+            --danger: #e63946;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --gradient-forest: linear-gradient(135deg, #0b2521 0%, #1a4d3e 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg);
+            background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 50px 24px; }
+
+        /* --- HEADER --- */
+        header {
+            position: relative;
+            padding: 100px 50px;
+            background: linear-gradient(rgba(11, 37, 33, 0.8), rgba(11, 37, 33, 0.9)), 
+                        url('https://images.unsplash.com/photo-1596402184320-417d7178b2cd?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 32px;
+            margin-bottom: 50px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .live-rate {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            padding: 15px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .live-rate label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; }
+        .live-rate span { font-family: monospace; font-size: 1.1rem; font-weight: 600; margin-top: 5px; }
+
+        header h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 15px; letter-spacing: -2px; }
+        header p { font-size: 1.2rem; font-weight: 400; opacity: 0.8; letter-spacing: 3px; text-transform: uppercase; }
+
+        .countdown {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--gradient-gold);
+            padding: 12px 30px;
+            border-radius: 100px;
+            margin-top: 40px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* --- CARDS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 30px; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 32px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-forest);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(11, 37, 33, 0.2);
+        }
+
+        .card h2 { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 25px; letter-spacing: -0.5px; }
+
+        /* Progress Bar */
+        .progress-container { margin-top: 25px; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; }
+        .progress-bar { width: 100%; height: 10px; background: #eee; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gradient-forest); border-radius: 10px; transition: width 1s ease-in-out; }
+
+        /* List Items */
+        .item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }
+        .item:last-child { border-bottom: none; }
+        .item-key { font-weight: 600; color: var(--text-main); font-size: 0.95rem; }
+        .item-val { color: var(--text-muted); font-size: 0.95rem; }
+
+        .badge {
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .badge-success { background: #d8f3dc; color: #1b4332; }
+        .badge-warning { background: #fff3b0; color: #856404; }
+
+        /* --- MAPS --- */
+        .map-section { margin-top: 60px; }
+        .map-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            height: 250px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+        }
+        .map-img { flex: 1.2; background-size: cover; background-position: center; position: relative; }
+        .map-img::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); }
+        .map-content { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            width: fit-content;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .map-link:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- CHARTS --- */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; }
+
+        @media (max-width: 900px) {
+            header h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; }
+            .map-card { flex-direction: column; height: auto; }
+            .map-img { height: 200px; }
+            .chart-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="live-rate">
+            <label>Live Exchange Rate</label>
+            <span id="exchangeRate">1 SGD ≈ Loading...</span>
+        </div>
+        <p>Est. June 2026</p>
+        <h1>Bandung Escape</h1>
+        <div class="countdown">
+            <i data-lucide="timer" size="20"></i>
+            <span id="countdown">Loading Timeline...</span>
+        </div>
+
+        <div class="hero-content">
+            <p class="quote">"Collecting moments that turn into family legacies."</p>
+            <p class="description">
+                Prepare for an unforgettable journey into the heart of West Java. From the cool, misty mornings of the Lembang highlands to the vibrant heritage streets of Bandung, this escape is about more than just travel—it's about 13 hearts sharing one big adventure. We'll find joy in the shared villa laughter, the thrill of the rainbow slides, and the quiet moments amidst the orchids. Get ready, family—Bandung awaits!
+            </p>
+        </div>
+    </header>
+
+    <div class="grid">
+        <!-- Flight Dashboard -->
+        <div class="card">
+            <div class="icon-box"><i data-lucide="plane-takeoff"></i></div>
+            <h2>Flight Budget</h2>
+            <div class="item">
+                <span class="item-key">Total (13 Pax)</span>
+                <span class="item-val" style="font-weight: 800; color: var(--primary);">$2,915.90</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Payment Progress</span>
+                    <span>20%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+            </div>
+            <div style="margin-top: 20px;">
+                <div class="item">
+                    <span class="item-key">Deposit Paid</span>
+                    <span class="badge badge-success">$583.18</span>
+                </div>
+                <div class="item">
+                    <span class="item-key">Balance Due</span>
+                    <span class="badge badge-warning">$2,332.72</span>
+                </div>
+                <div class="item">
+                    <span class="item-key">Due Date</span>
+                    <span class="item-val" style="color: var(--danger); font-weight: 700;">07 MAY 2026</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accommodation Roadmap -->
+        <div class="card">
+            <div class="icon-box"><i data-lucide="map"></i></div>
+            <h2>Stay Roadmap</h2>
+            <div class="item">
+                <div>
+                    <span class="item-key">Aerotel T1</span><br>
+                    <small>Gate D40 • 11 PM</small>
+                </div>
+                <span class="badge badge-warning">JUN 04 PAY</span>
+            </div>
+            <div class="item">
+                <div>
+                    <span class="item-key">Villa Pamperompong</span><br>
+                    <small>Lembang • 5 Nights</small>
+                </div>
+                <span class="badge badge-warning">SHORTLISTED</span>
+            </div>
+            <div class="item">
+                <div>
+                    <span class="item-key">Fieris Kertajati</span><br>
+                    <small>Final Night • Executive</small>
+                </div>
+                <span class="badge badge-success">PAID</span>
+            </div>
+        </div>
+
+        <!-- Logistics -->
+        <div class="card">
+            <div class="icon-box"><i data-lucide="shield-check"></i></div>
+            <h2>Trip Logistics</h2>
+            <div class="item">
+                <span class="item-key">Private Bus (Quoted)</span>
+                <span class="item-val">~20M IDR</span>
+            </div>
+            <div class="item">
+                <span class="item-key">Luggage Load</span>
+                <span class="item-val">7 Pieces (2L, 3M, 2S)</span>
+            </div>
+            <div class="item">
+                <span class="item-key">Jewel ECI Time</span>
+                <span class="item-val">05 Jun, 10:00 PM</span>
+            </div>
+            <div class="item">
+                <span class="item-key">Namelist</span>
+                <span class="badge badge-success">DONE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Sections -->
+    <div class="map-section">
+        <div class="map-card">
+            <div class="map-img" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=1000');"></div>
+            <div class="map-content">
+                <h2>🌲 Lembang Highlands</h2>
+                <p>Curated list of parks, zoos, and the villa location.</p>
+                <a href="https://maps.app.goo.gl/F6x393mVqgqh6TCi7" target="_blank" class="map-link">
+                    <i data-lucide="map-pinned"></i> Explore Highlands
+                </a>
+            </div>
+        </div>
+        <div class="map-card">
+            <div class="map-img" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000');"></div>
+            <div class="map-content">
+                <h2>🏙️ Bandung City Center</h2>
+                <p>Braga street, heritage walks, and urban shopping.</p>
+                <a href="https://maps.app.goo.gl/NW6DitB8m1gzBvoY7" target="_blank" class="map-link">
+                    <i data-lucide="navigation"></i> Explore City
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    lucide.createIcons();
+
+    // Live Exchange Rate
+    async function fetchExchangeRate() {
+        try {
+            const response = await fetch('https://open.er-api.com/v6/latest/SGD');
+            const data = await response.json();
+            const rate = data.rates.IDR;
+            document.getElementById('exchangeRate').innerHTML = `1 SGD ≈ ${new Intl.NumberFormat('id-ID').format(Math.round(rate))} IDR`;
+        } catch (e) { document.getElementById('exchangeRate').innerHTML = "N/A"; }
+    }
+    fetchExchangeRate();
+
+    // Countdown logic
+    const target = new Date("June 5, 2026 22:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = target - now;
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("countdown").innerHTML = `${d}D ${h}H ${m}M ${s}S UNTIL BANDUNG`;
+    }, 1000);
+</script>
+
+</body>
+</html>
