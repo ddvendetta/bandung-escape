@@ -24,7 +24,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg);
@@ -243,8 +243,10 @@
         <div class="hero-content">
             <p class="quote">"If you want to go fast, go alone. If you want to go far, go together."</p>
             <p class="description">- African Proverb</p>
-            <p style="font-size: 0.65rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px; margin-top: -10px; margin-bottom: 20px;">Last Updated: 08 Apr 2026</p>
-            
+            <p style="font-size: 0.65rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px; margin-top: -10px; margin-bottom: 20px;">
+                Last Updated: 08 Apr 2026 • <span id="lastUpdatedRel">Today</span>
+            </p>
+
             <div class="metrics-grid">
                 <div class="metric-card">
                     <span class="metric-value">13</span>
@@ -302,7 +304,7 @@
         <div class="card">
             <div class="icon-box"><i data-lucide="map"></i></div>
             <h2>Stay Roadmap</h2>
-            
+
             <!-- Aerotel -->
             <div style="margin-bottom: 25px;">
                 <div class="item" style="border-bottom: none; padding-bottom: 10px;">
@@ -408,7 +410,7 @@
     // Live & Historical Exchange Rate
     async function fetchExchangeRate() {
         let rate = 11700; // Fallback
-        
+
         // 1. Fetch Live Rate
         try {
             const liveRes = await fetch('https://open.er-api.com/v6/latest/SGD');
@@ -479,14 +481,14 @@
         const start = new Date("January 1, 2026").getTime();
         const deadline = new Date("June 4, 2026").getTime();
         const now = new Date().getTime();
-        
+
         const total = deadline - start;
         const elapsed = now - start;
         const remaining = deadline - now;
-        
+
         const percent = Math.min(100, Math.max(0, (elapsed / total) * 100));
         const daysLeft = Math.ceil(remaining / 86400000);
-        
+
         document.getElementById('aerotelMiniFill').style.width = percent + '%';
         document.getElementById('aerotelPercentLabel').innerHTML = Math.round(percent) + '%';
         document.getElementById('aerotelDaysLabel').innerHTML = daysLeft > 0 ? daysLeft + " days until deadline" : "Deadline reached";
@@ -505,6 +507,22 @@
         document.getElementById('readinessScore').innerHTML = readiness + "%";
     }
     calculateOverallMetrics();
+
+    // Last Updated Relative Time
+    function updateLastUpdatedRel() {
+        const lastUpdate = new Date("2026-04-08");
+        const now = new Date();
+        const diffTime = Math.abs(now - lastUpdate);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        let text = "";
+        if (diffDays === 0) text = "Today";
+        else if (diffDays === 1) text = "Yesterday";
+        else text = `${diffDays} days ago`;
+
+        document.getElementById('lastUpdatedRel').innerHTML = text;
+    }
+    updateLastUpdatedRel();
 </script>
 
 </body>
