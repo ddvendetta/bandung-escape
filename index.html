@@ -248,8 +248,8 @@
                     <span class="metric-label">Duration</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-value" id="overallPayment">25%</span>
-                    <span class="metric-label">Budget Paid</span>
+                    <span class="metric-value" id="totalCostMetric">$6,100</span>
+                    <span class="metric-label">Total Cost So Far</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-value" id="readinessScore">70%</span>
@@ -442,11 +442,10 @@
 
     // Command Center Metrics Calculation
     function calculateOverallMetrics() {
-        // Budget logic (Flight: 583/2915, Fieris: 200/200, Aerotel: 0/1252, Bus: 0/1674)
+        // Budget logic (Flight: 2915, Fieris: 200, Aerotel: 1252, Bus: 1674)
         const totalBudget = 2915 + 200 + 1252 + 1674;
-        const totalPaid = 583 + 200;
-        const budgetPercent = Math.round((totalPaid / totalBudget) * 100);
-        document.getElementById('overallPayment').innerHTML = budgetPercent + "%";
+        const roundedTotal = Math.ceil(totalBudget / 100) * 100;
+        document.getElementById('totalCostMetric').innerHTML = "$" + new Intl.NumberFormat('en-US').format(roundedTotal);
 
         // Readiness score (Arbitrary logic: Flights booked (25%), 2/3 Hotels booked (25%), Bus quoted (10%), Namelist done (10%))
         const readiness = 25 + 25 + 10 + 10;
